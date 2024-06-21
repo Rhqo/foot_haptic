@@ -13,8 +13,10 @@ public class CylinderConnector : MonoBehaviour
     private Transform cylinder;
 
     public Transform Cone;
+    public GameObject ConeObject;
 
     public Transform toe;
+    public Transform toe2;
 
     void Start()
     {
@@ -36,7 +38,16 @@ public class CylinderConnector : MonoBehaviour
         }
 
         // lerpFactor 값을 0과 1 사이로 제한
-        lerpFactor = ((toe.position.y) / 0.52f - 0.6f)*2f;
+        lerpFactor = ((toe.position.y) / 0.52f - 0.5f)*2f;
+        
+        if (lerpFactor == 1f)
+        {
+            ConeObject.SetActive(false);
+        }
+        else
+        {
+            ConeObject.SetActive(true);
+        }
 
         Vector3 lerpedPosition = Vector3.Lerp(topSphere.position, bottomSphere.position, lerpFactor);
         UpdateCylinder(cylinder, bottomSphere.position, lerpedPosition);
